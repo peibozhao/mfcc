@@ -3,8 +3,6 @@
 #include <cmath>
 #include "numpy/core/function_base.h"
 
-#include <iostream>
-
 namespace librosa {
 
 std::vector<float> fft_frequencies(int sr, int n_fft) {

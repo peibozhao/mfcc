@@ -1,6 +1,5 @@
 
 #include "multiarray.h"
-#include <iostream>
 
 namespace numpy {
 

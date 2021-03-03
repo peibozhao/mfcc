@@ -5,8 +5,6 @@
 #include "librosa/core/convert.h"
 #include "numpy/core/function_base.h"
 
-#include <iostream>
-
 namespace librosa {
 
 std::vector<std::vector<float>> mel(int sr, int n_fft, int n_mels, float fmin, std::optional<float> fmax, bool htk, const std::string &norm) {

@@ -2,8 +2,6 @@
 #include "realtransforms.h"
 #include "scipy/fft/_pocketfft/pocketfft_hdronly.h"
 #include "scipy/fft/_pocketfft//helper.h"
-#include <iostream>
-
 namespace scipy {
 
 static float norm_fct(int inorm, size_t N) {

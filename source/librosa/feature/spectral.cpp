@@ -8,9 +8,6 @@
 #include "librosa/filters.h"
 #include "numpy/core/multiarray.h"
 
-#include <iostream>
-#include "tool/print.h"
-
 namespace librosa {
 
 std::vector<std::vector<float>> mfcc(const std::vector<float> &y, int sr,

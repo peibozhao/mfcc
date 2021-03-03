@@ -8,8 +8,6 @@
 #include <algorithm>
 #include <cmath>
 
-#include <iostream>
-
 namespace librosa {
 
 std::vector<std::vector<float>> power_to_db(const std::vector<std::vector<float>> &S, float ref, float amin, std::optional<float> top_db) {

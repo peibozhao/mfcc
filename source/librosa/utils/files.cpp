@@ -3,8 +3,6 @@
 #include <fstream>
 #include <algorithm>
 
-#include <iostream>
-
 namespace librosa {
 
 // TODO
@@ -32,11 +30,9 @@ std::vector<float> load(const std::string &fname) {
     wavHeader wav_header;
     ifs.read((char *)&wav_header, sizeof(wav_header));
     if (std::string((char *)wav_header.Subchunk2ID, 4) != std::string("data")) {
-        std::cout << "Wav header error" << std::endl;
         abort();
     }
     int sample_count = wav_header.Subchunk2Size / 2;
-    std::cout << "Samples: " << sample_count << std::endl;
     short *simples = new short[sample_count];
     ifs.read((char *)simples, sizeof(short) * sample_count);
     std::vector<float> ret;
