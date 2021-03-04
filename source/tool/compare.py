@@ -23,7 +23,7 @@ if dims != arr2.shape:
 
 arr_diff = arr1 - arr2
 
-idxs = np.where(np.abs(arr_diff) > print_thresh)
+idxs = np.where(np.abs(arr_diff / (arr2 + 0.00001)) > print_thresh)
 
 np.set_printoptions(threshold=np.inf)
 print(idxs)

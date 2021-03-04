@@ -33,8 +33,8 @@ std::vector<float> load(const std::string &fname) {
         abort();
     }
     int sample_count = wav_header.Subchunk2Size / 2;
-    short *simples = new short[sample_count];
-    ifs.read((char *)simples, sizeof(short) * sample_count);
+    std::vector<short> simples(sample_count);
+    ifs.read((char *)simples.data(), sizeof(short) * sample_count);
     std::vector<float> ret;
     for (int i = 0; i < sample_count; ++i) {
         ret.push_back(simples[i] / 32768.f);
