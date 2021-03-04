@@ -37,19 +37,7 @@ static std::vector<float> dct_internal(const std::vector<float> &in, int axis, i
 
     float fct = (type == 1) ? norm_fct(inorm, dims, axes, 2, -1) : norm_fct(inorm, dims, axes, 2);
     bool ortho = inorm == 1;
-    // std::cout << dims[0] << std::endl;
-    // std::cout << s_in[0] << std::endl;
-    // std::cout << axes[0] << std::endl;
-    // std::cout << type << std::endl;
-    // std::cout << d_in[0] << std::endl;
-    // std::cout << d_in[1] << std::endl;
-    // std::cout << d_in[2] << std::endl;
-    // std::cout << fct << std::endl;
-    // std::cout << ortho << std::endl;
     pocketfft::dct<float>(dims, s_in, s_out, axes, type, d_in, d_out, fct, ortho, 1);
-    // std::cout << d_out[0] << std::endl;
-    // std::cout << d_out[1] << std::endl;
-    // std::cout << d_out[2] << std::endl;
     return res;
 }
 

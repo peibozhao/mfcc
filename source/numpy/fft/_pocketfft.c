@@ -2197,8 +2197,7 @@ int execute_real_forward(const float *a1, int a1size, float fct, float **ret_ptr
         a1_double[i] = a1[i];
     }
 
-    int odim = a1size;
-    int npts = odim;
+    int npts = a1size;
     // Complex. need *2
     int tdim = npts / 2 + 1;
     double *rptr = (double *)malloc(sizeof(double) * tdim * 2);
@@ -2207,22 +2206,20 @@ int execute_real_forward(const float *a1, int a1size, float fct, float **ret_ptr
     plan = make_rfft_plan(npts);
     if (!plan) { fail = 1; }
     while (!fail) {
-        int rstep = (tdim - 1) * 2;
+        int rstep = tdim * 2;
         rptr[rstep - 1] = 0.f;
         memcpy(rptr + 1, dptr, npts * sizeof(double));
         if (rfft_forward(plan, rptr + 1, fct) != 0) {
             fail = 1;
-            break;    
+            break;
         }
         rptr[0] = rptr[1];
         rptr[1] = 0.f;
-        // rptr += rstep;
-        // dptr += npts;
         break;
     }
     if (plan) { destroy_rfft_plan(plan); }
     if (a1_double) { free(a1_double); }
-    *ret_ptr = malloc(tdim * 2 * sizeof(double));
+    *ret_ptr = malloc(tdim * 2 * sizeof(float));
     for (int i = 0; i < tdim * 2; ++i) {
         (*ret_ptr)[i] = rptr[i];
     }
