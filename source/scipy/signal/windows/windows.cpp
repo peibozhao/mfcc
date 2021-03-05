@@ -1,7 +1,7 @@
 
 #include "windows.h"
 #include <algorithm>
-#include <math.h>
+#include <cmath>
 #include "numpy/core/function_base.h"
 #include "numpy/init.h"
 #include "numpy/core/numeric.h"

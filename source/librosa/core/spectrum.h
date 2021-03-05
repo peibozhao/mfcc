@@ -5,6 +5,7 @@
 #include <tuple>
 #include <optional>
 #include <complex>
+#include <string>
 
 namespace librosa {
 

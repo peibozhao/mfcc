@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <tuple>
+#include <string>
 
 namespace scipy {
 
