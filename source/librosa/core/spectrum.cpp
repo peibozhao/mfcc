@@ -34,7 +34,7 @@ std::vector<std::vector<float>> power_to_db(const std::vector<std::vector<float>
             auto iter = std::max_element(log_spec[i].begin(), log_spec[i].end());
             log_spec_max = *iter > log_spec_max ? *iter : log_spec_max;
         }
-        log_spec_max -= top_db.value();
+        log_spec_max -= *top_db;
 
         std::for_each(
             log_spec.begin(), log_spec.end(), [log_spec_max](std::vector<float> &sub_log_spec) {
@@ -56,13 +56,13 @@ _spectrogram(const std::vector<float> &y, std::optional<std::vector<std::vector<
         auto S_complex = stft(y, n_fft, hop_length, win_lenght, window, center, pad_mode);
         S->resize(S_complex.size());
         for (int i = 0; i < S_complex.size(); ++i) {
-            S.value()[i].resize(S_complex[i].size());
+            (*S)[i].resize(S_complex[i].size());
             for (int j = 0; j < S_complex[i].size(); ++j) {
-                S.value()[i][j] = std::pow(std::abs(S_complex[i][j]), power);
+                (*S)[i][j] = std::pow(std::abs(S_complex[i][j]), power);
             }
         }
     }
-    return std::make_tuple(S.value(), n_fft);
+    return std::make_tuple(*S, n_fft);
 }
 
 std::vector<std::vector<std::complex<float>>> stft(const std::vector<float> &y, int n_fft,
@@ -75,10 +75,10 @@ std::vector<std::vector<std::complex<float>>> stft(const std::vector<float> &y, 
     }
 
     if (!hop_length) {
-        hop_length = win_length.value() / 4;
+        hop_length = *win_length / 4;
     }
 
-    std::vector<float> fft_window = get_window(window, win_length.value(), true);
+    std::vector<float> fft_window = get_window(window, *win_length, true);
 
     // TODO
     // Pad window out to n_fft size
@@ -92,7 +92,7 @@ std::vector<std::vector<std::complex<float>>> stft(const std::vector<float> &y, 
         abort();
     }
 
-    std::vector<std::vector<float>> y_frames = librosa::frame(y_bak, n_fft, hop_length.value());
+    std::vector<std::vector<float>> y_frames = librosa::frame(y_bak, n_fft, *hop_length);
 
     std::vector<std::vector<std::complex<float>>> stft_matrix(1 + n_fft / 2, std::vector<std::complex<float>>(y_frames[0].size()));
 

@@ -20,11 +20,11 @@ std::vector<std::vector<float>> mfcc(const std::vector<float> &y, int sr,
         S = power_to_db(powers);
     }
 
-    std::vector<std::vector<float>> M(n_mfcc, std::vector<float>(S.value()[0].size()));
-    for (int i = 0; i < S.value()[0].size(); ++i) {
-        std::vector<float> dct_input(S.value().size());
-        for (int j = 0; j < S.value().size(); ++j) {
-            dct_input[j] = S.value()[j][i];
+    std::vector<std::vector<float>> M(n_mfcc, std::vector<float>((*S)[0].size()));
+    for (int i = 0; i < (*S)[0].size(); ++i) {
+        std::vector<float> dct_input((*S).size());
+        for (int j = 0; j < (*S).size(); ++j) {
+            dct_input[j] = (*S)[j][i];
         }
         std::vector<float> dct_output = scipy::dct(dct_input, dct_type, std::optional<int>(), 0, norm);
         for (int j = 0; j < n_mfcc; ++j) {
@@ -50,7 +50,7 @@ melspectrogram(const std::vector<float> &y, int sr,
     auto temp = _spectrogram(y, S, n_fft, hop_length, power, win_lenght, window, center, pad_mode);
     std::tie(S, n_fft) = temp;
     std::vector<std::vector<float>> mel_basis = librosa::mel(sr, n_fft);
-    return numpy::dot(mel_basis, S.value());
+    return numpy::dot(mel_basis, *S);
 }
 
 }

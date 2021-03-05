@@ -14,7 +14,7 @@ std::vector<std::vector<float>> mel(int sr, int n_fft, int n_mels, float fmin, s
     }
     std::vector<std::vector<float>> weights = numpy::zeros(n_mels, int(1 + n_fft / 2));
     std::vector<float> fftfreqs = librosa::fft_frequencies(sr, n_fft);
-    std::vector<float> mel_f = librosa::mel_frequencies(n_mels + 2, fmin, fmax.value(), htk);
+    std::vector<float> mel_f = librosa::mel_frequencies(n_mels + 2, fmin, *fmax, htk);
     std::vector<float> fdiff = numpy::diff(mel_f);
 
     std::vector<std::vector<float>> ramps(mel_f.size(), std::vector<float>(fftfreqs.size(), 0.f));
