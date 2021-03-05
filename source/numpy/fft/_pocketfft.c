@@ -17,7 +17,9 @@
 #include <stdlib.h>
 #include "_pocketfft.h"
 
-// #define restrict NPY_RESTRICT
+#ifdef __cplusplus
+#define restrict  // Why vs compile this file as cpp?
+#endif
 
 #define RALLOC(type,num) \
   ((type *)malloc((num)*sizeof(type)))

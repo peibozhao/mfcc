@@ -1,5 +1,6 @@
 
 #include "filters.h"
+#include <algorithm>
 #include "numpy/core/numeric.h"
 #include "scipy/signal/windows/windows.h"
 #include "librosa/core/convert.h"
