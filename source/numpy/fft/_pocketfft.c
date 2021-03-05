@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include "_pocketfft.h"
 
-#ifdef __cplusplus
+#ifdef WIN32
 #define restrict  // Why vs compile this file as cpp?
 #endif
 
