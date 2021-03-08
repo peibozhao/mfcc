@@ -153,7 +153,7 @@ template<> struct VLEN<double> { static constexpr size_t val=2; };
 #include <TargetConditionals.h>
 #endif
 
-#if (TARGET_OS_IPHONE != 1) && (__cplusplus >= 201703L)
+#if (TARGET_OS_IPHONE != 1) && (!defined(__ANDROID__)) && (__cplusplus >= 201703L)
 inline void *aligned_alloc(size_t align, size_t size)
   {
   void *ptr = ::aligned_alloc(align,size);
